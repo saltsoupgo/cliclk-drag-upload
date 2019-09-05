@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/jquery.min.js"></script>
+    <style>
+        img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <img src="./image/风景2.jpg" alt="" id="img">
+        <input type="file" hidden id="choose">
+        <input type="button" value="确定" id="btn">
+    </div>
+    <script>
+        img = $('#img');
+        choose = $('#choose');
+        file = $('#file');
+        img.on('click', function() {
+            choose.trigger('click');
+        })
+        choose.on('change', function(ev) {
+            var ev = ev || event;
+            var file = ev.currentTarget.files[0];
+            var Fr = new FileReader();
+            Fr.readAsDataURL(file);
+            Fr.onload = function() {
+                img.attr('src', Fr.result);
+            }
+        })
+        btn.on('click', function() {
+            var Form = new FormData();
+            Form.append('file', file);
+            $.ajax({
+                url,
+                data: Form,
+                dataType: "json",
+                processData: false,
+                contentType: false,
+                success: function() {
+                    console.log(success);
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>

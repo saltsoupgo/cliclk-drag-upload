@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        #box {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            background: red;
+            margin: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+</body>
+<script>
+    var box = document.getElementById('box');
+    box.onmousedown = function(ev) {
+        var ev = ev || event;
+        var mouseboxX = (ev.clientX - box.offsetLeft);
+        var mouseboxY = (ev.clientY - box.offsetTop);
+        document.onmousemove = function(ev) {
+            var ev = ev || event;
+            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            var boxW = ev.clientX;
+            var boxH = ev.clientY;
+            box.style.top = scrollTop + boxH - mouseboxY + 'px';
+            box.style.left = boxW - mouseboxY + 'px';
+        }
+        document.onmouseup = function() {
+            document.onmouseup = document.onmousemove = null;
+        }
+    }
+</script>
+
+</html>
